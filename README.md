@@ -1,6 +1,6 @@
 # Email Summarizer AI
 
-An intelligent email management system that automatically fetches unread emails, generates AI-powered summaries using **Ollama** (cloud LLM), and sends them to Slack with human approval.
+An intelligent email management system that automatically fetches unread emails, generates AI-powered summaries using **Ollama** and sends them to Slack with human approval.
 
 ## Features
 
@@ -43,9 +43,7 @@ Email_Summarizer/
 
 - Python 3.8+
 - Gmail account with API access enabled
-- Ollama installed locally with a compatible model (e.g., llama2, mistral, codellama)
-- Slack workspace with incoming webhook
-
+- Slack token and Channel ID
 ## Installation
 
 1. **Clone the repository**
@@ -111,9 +109,8 @@ The email fetching is configured in `nodes/fetch_emails.py`. By default, it:
 
 ### AI Summarization
 
-The summarization uses **Ollama** with local LLM models (llama2, mistral, etc.) and is configured in `nodes/summarize.py`. You can customize:
+The summarization uses **Ollama cloud model (qwen3-coder:480b-cloud)**  and is configured in `nodes/summarize.py`. You can customize:
 
-- Model selection (set via `OLLAMA_MODEL` environment variable)
 - Temperature and other parameters
 - Prompt engineering for better summaries
 - Model endpoint (default: `http://localhost:11434`)
@@ -164,57 +161,6 @@ The project uses **LangGraph** for workflow orchestration:
 - **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
 - **Real-time**: WebSockets
 - **Styling**: Custom CSS with gradients and animations
-
-## Security Notes
-
-- Never commit `credentials.json`, `token.json`, or `.env` files
-- Keep your API keys and webhook URLs secure
-- Use environment variables for sensitive data
-- The `token.json` is auto-generated on first OAuth flow
-- **Privacy advantage**: With Ollama, all AI processing happens locally - your email content never leaves your machine
-
-## Troubleshooting
-
-**Gmail Authentication Issues:**
-
-- Ensure `credentials.json` is properly configured
-- Delete `token.json` and re-authenticate
-- Check Gmail API is enabled in Google Cloud Console
-
-**WebSocket Connection Failed:**
-
-- Verify the server is running on port 8000
-- Check for firewall or proxy issues
-- Ensure browser supports WebSockets
-
-**AI Summary Not Generating:**
-
-- Verify Ollama is running (`ollama serve`)
-- Check that your model is pulled (`ollama list`)
-- Ensure `OLLAMA_MODEL` matches an available model
-- Test Ollama directly: `ollama run llama2 "test prompt"`
-- Check if Ollama endpoint is accessible (default: `http://localhost:11434`)
-- Review console logs for detailed errors
-
-**Slack Message Not Sending:**
-
-- Confirm `SLACK_WEBHOOK_URL` is correct
-- Test webhook manually with curl
-- Check Slack workspace permissions
-
-## Future Enhancements
-
-- [ ] Multi-email provider support (Outlook, Yahoo)
-- [ ] Email filtering and categorization
-- [ ] Scheduled automatic summaries
-- [ ] Summary templates
-- [ ] Multi-language support
-- [ ] Email priority detection
-- [ ] Attachment handling
-
-## License
-
-MIT License - feel free to use and modify as needed.
 
 ## Author
 
