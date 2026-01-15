@@ -1,4 +1,4 @@
-# Email Summarizer AI
+# Email Summarizer Agent
 
 An intelligent email management system that automatically fetches unread emails, generates AI-powered summaries using **Ollama** and sends them to Slack with human approval.
 
